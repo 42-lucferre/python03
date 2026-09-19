@@ -31,11 +31,11 @@ if __name__ == '__main__':
     print(f"Player Charlie: {p_charlie}")
     print(f"Player Dylan: {p_dylan}")
 
-    print(f"\nAll distinct achievements: {p_alice.union(p_bob, p_charlie,
-                                                        p_dylan)}")
+    print(f"\nAll distinct achievements: "
+          f"{p_alice.union(p_bob, p_charlie, p_dylan)}")
 
-    print(f"\nCommon achievements: {p_alice.intersection(p_charlie, p_bob,
-                                                         p_dylan)}")
+    print(f"\nCommon achievements: "
+          f"{p_alice.intersection(p_charlie, p_bob, p_dylan)}")
 
     print(f"\nOnly Alice has: {p_alice.difference(p_charlie, p_bob, p_dylan)}")
     print(f"Only Bob has: {p_bob.difference(p_charlie, p_alice, p_dylan)}")
