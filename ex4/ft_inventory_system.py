@@ -6,25 +6,40 @@ import sys
 inventory = {}
 
 
-def parse(args: list[object]) -> None:
+def parse(args: list[str]) -> None:
     for arg in args:
         try:
             item = arg.split(':')
             if len(item) != 2:
                 raise Exception
         except Exception:
-            print(f"Error - invalid parameter {arg}")
+            print(f"Error - invalid parameter '{arg}'")
+            continue
         try:
-            item[1] = int(item[1])
+            int(item[1])
         except Exception as e:
             print(f"Quantity error for '{item[0]}': {e}")
             continue
         if item[0] in inventory:
             print(f"Redundant item '{item[0]}' - discarding")
             continue
-        inventory[item[0]] = item[1]
-        print(inventory)
+        inventory[item[0]] = int(item[1])
 
+
+def most_finder(inventory: dict[str, int]) -> tuple[str, int]:
+    most = (list(inventory)[0], list(inventory.values())[0])
+    for key in inventory:
+        if inventory[key] > most[1]:
+            most = (key, inventory[key])
+    return (most)
+
+
+def least_finder(inventory: dict[str, int]) -> tuple[str, int]:
+    least = (list(inventory)[0], list(inventory.values())[0])
+    for key in inventory:
+        if inventory[key] < least[1]:
+            least = (key, inventory[key])
+    return (least)
 
 
 if __name__ == "__main__":
@@ -38,16 +53,12 @@ if __name__ == "__main__":
     print(f"Total quantity of the {len(inventory)} items: "
           f"{sum(list(inventory.values()))}")
 
-    most = None
-    less = None
-    most = inventory["sword"]
-    print(f"{most}")
     for key in inventory:
         print(f"Item {key} represents "
-              f"{inventory[key]/sum(list(inventory.values())) * 10:.1f}%")
-        # if not most:
-        #     most = inventory[key]
-        # else:
-        #     if
-
-    print(f"Item most abundant: {most} with quantity")
+              f"{inventory[key]/sum(list(inventory.values())) * 100:.1f}%")
+    most = most_finder(inventory)
+    least = least_finder(inventory)
+    print(f"Item most abundant: {most[0]} with quantity {most[1]}")
+    print(f"Item least abundant: {least[0]} with quantity {least[1]}")
+    inventory.update({"magic_item": 1})
+    print(f"Updated inventory: {inventory}")
