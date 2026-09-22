@@ -56,9 +56,10 @@ if __name__ == "__main__":
     for key in inventory:
         print(f"Item {key} represents "
               f"{inventory[key]/sum(list(inventory.values())) * 100:.1f}%")
-    most = most_finder(inventory)
-    least = least_finder(inventory)
-    print(f"Item most abundant: {most[0]} with quantity {most[1]}")
-    print(f"Item least abundant: {least[0]} with quantity {least[1]}")
+    if inventory:
+        most = most_finder(inventory)
+        least = least_finder(inventory)
+        print(f"Item most abundant: {most[0]} with quantity {most[1]}")
+        print(f"Item least abundant: {least[0]} with quantity {least[1]}")
     inventory.update({"magic_item": 1})
     print(f"Updated inventory: {inventory}")
