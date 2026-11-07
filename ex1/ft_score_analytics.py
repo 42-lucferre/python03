@@ -7,7 +7,7 @@ class NoScores(Exception):
     pass
 
 
-def parse(args: list[object]) -> list[int]:
+def parse(args: list[str]) -> list[int]:
     scores_list: list[int] = []
     if len(args) < 1:
         raise NoScores("No scores provided. Usage: python3 "
@@ -16,8 +16,8 @@ def parse(args: list[object]) -> list[int]:
     i: int = 0
     for arg in args:
         try:
-            arg = int(arg)
-            scores_list[len(scores_list):] = [arg]
+            int_arg = int(arg)
+            scores_list[len(scores_list):] = [int_arg]
             i += 1
         except ValueError:
             print(f"Invalid parameter: '{arg}'")
